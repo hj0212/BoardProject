@@ -41,7 +41,7 @@ public class FrontController extends HttpServlet {
 				BoardDTO dto = dao.readArticle(seq);
 				request.setAttribute("article", dto);
 				isForward = true;
-				dst = "read.jsp";
+				dst = "read.jsp?seq=" + seq;
 
 			} else if(command.equals("/write.bo")) {
 				BoardDTO dto = new BoardDTO();
@@ -52,22 +52,24 @@ public class FrontController extends HttpServlet {
 
 				int result = dao.writeArticle(dto);
 
-				request.setAttribute("result", result);
+				request.setAttribute("result", result); 
 				isForward = true;
 				dst = "result.jsp";
 
-			} else if(command.equals("/modify.bo")) {
+			} 	else if(command.equals("/pwcheck.bo")) {
+				
+			}	else if(command.equals("/modify.bo")) {
 				int seq = Integer.parseInt((String)request.getParameter("seq"));
 				
 				BoardDTO dto = new BoardDTO();
+				dto.setSeq(seq);
 				dto.setTitle(request.getParameter("title"));
 				dto.setPassword(request.getParameter("password"));
 				dto.setContents(request.getParameter("contents"));
-				dto.setIp(request.getRemoteAddr());
 
-				int result = dao.modifyArticle(dto);
+//				int result = dao.modifyArticle(dto);
 
-				request.setAttribute("result", result);
+//				request.setAttribute("result", result);
 				request.setAttribute("seq", seq);
 				isForward = true;
 				dst = "result.jsp";
