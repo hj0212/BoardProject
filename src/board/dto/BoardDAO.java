@@ -3,6 +3,7 @@ package board.dto;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class BoardDAO {
 	private Connection getConnection() throws Exception {
@@ -28,5 +29,29 @@ public class BoardDAO {
 		pstmt.close();
 		conn.close();
 		return result;
+	}
+	
+	public BoardDTO readArticle(int seq) throws Exception{
+		Connection conn = this.getConnection();
+		BoardDTO tmp = new BoardDTO();
+		String sql = "SELECT * FROM BOARD WHERE SEQ = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, seq);
+		
+		ResultSet rs = pstmt.executeQuery();
+		if(rs.next()) {
+			tmp.setSeq(rs.getInt("SEQ"));
+			tmp.setTitle(rs.getString("TITLE"));
+			tmp.setPassword(rs.getString("PASSWORD"));
+			tmp.setContents(rs.getString("CONTENTS"));
+			tmp.setWritedate(rs.getString("WRITEDATE"));
+			tmp.setViewcount(rs.getInt("VIEWCOUNT"));
+			tmp.setIp(rs.getString("IP"));
+		}
+		
+		rs.close();
+		pstmt.close();
+		conn.close();
+		return tmp;
 	}
 }
