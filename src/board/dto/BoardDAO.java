@@ -20,12 +20,22 @@ public class BoardDAO {
 		Connection conn = this.getConnection();
 		String sql = "INSERT INTO BOARDDB VALUES(BOARD_SEQ.NEXTVAL,?,?,?,sysdate,0,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet rs = null;
 		pstmt.setString(1, dto.getTitle());
 		pstmt.setString(2, dto.getPassword());
 		pstmt.setString(3, dto.getContents());
 		pstmt.setString(4, dto.getIp());
 		
 		int result = pstmt.executeUpdate();
+		
+		if(result > 0) {
+			sql = "SELECT SEQ FROM (SELECT * FROM BOARDDB ORDER BY SEQ DESC) WHERE ROWNUM = 1";
+			rs = conn.prepareStatement(sql).executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}
 		
 		conn.commit();
 		pstmt.close();
