@@ -57,6 +57,17 @@ public class FrontController extends HttpServlet {
 				dst = "result.jsp";
 
 			} 	else if(command.equals("/pwcheck.bo")) {
+				System.out.println("여기");
+				String password = request.getParameter("password");
+				int seq = Integer.parseInt((String)request.getParameter("seq"));
+				
+				if(dao.passwordCheck(seq, password)) {
+				
+				isForward = false;
+				dst = "modify.jsp?seq=" + seq;
+				} else {
+					
+				}
 				
 			}	else if(command.equals("/modify.bo")) {
 				int seq = Integer.parseInt((String)request.getParameter("seq"));
