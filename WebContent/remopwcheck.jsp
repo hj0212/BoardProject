@@ -8,7 +8,6 @@
 
 </head>
 <body>
-<form action="pwcheck.bo?seq=${param.seq}" method="post">
 <table>
 	<tr> 
 		<td>패스워드를 입력하세요</td>
@@ -19,12 +18,14 @@
 	<tr>
 		<td><button id="okbtn">확인</button></td>
 	</tr>
+
 </table>
-</form>
+
 <script>
-document.getElementById("okbtn").onclick = function() {
-    window.close();
-}
+	document.getElementById("okbtn").onclick = function() {
+		location.href = "pwcheck.bo";
+	}
+
 </script>
 
 </body>
