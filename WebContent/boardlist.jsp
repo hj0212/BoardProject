@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 
 <style>
-
 #wrap {
 	width: 800px;
 	height: 900px;
@@ -19,11 +18,28 @@
 
 table {
 	text-align: center;
-	width:800px;
+	width: 800px;
 }
-.top{
-border-bottom:1px solid gray;
-box-sizing:border-box;
+
+.top {
+	border-bottom: 1px solid gray;
+	box-sizing: border-box;
+}
+
+#bottom {
+	border-top: 1px solid gray;
+	box-sizing: border-box;
+}
+#bottomtr{
+	margin-top:30px;
+}
+a{
+text-decoration:none;
+color:black;
+}
+a:hover{
+text-decoration:underline;
+color:purple;
 }
 </style>
 </head>
@@ -39,15 +55,27 @@ box-sizing:border-box;
 			</tr>
 			<c:forEach var="dto" items="${boardlist}">
 				<tr>
-				<td>${dto.seq}</td>
-				<td>${dto.title}</td>
-				<td>${dto.writedate}</td>
-				<td>${dto.viewcount}</td>
+					<td>${dto.seq}</td>
+					<td class="title"><a href="read.bo?seq=${dto.seq}">${dto.title}</a></td>
+					<td>${dto.writedate}</td>
+					<td>${dto.viewcount}</td>
 				</tr>
-			</c:forEach>		
-		
+			</c:forEach>
+			<tr id="bottomtr">
+				<td colspan=4 id="bottom">
+					<button id="writeBtn">글 쓰기</button>
+					<button id="backBtn">홈으로</button>
+				</td>
+			</tr>
 		</table>
 	</div>
-
+	<script>
+		document.getElementById("writeBtn").onclick = function() {
+			location.href = "write.jsp";
+		}
+		document.getElementById("backBtn").onclick = function() {
+			location.href = "index.html";
+		}
+	</script>
 </body>
 </html>
