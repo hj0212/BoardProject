@@ -95,8 +95,7 @@
 			</td>
 		</tr>
 	</table>
-	<script>
-		<script>
+	<script>		
 		document.getElementById("listBtn").onclick = function() {
 			location.href="viewList.bo";
 		}
