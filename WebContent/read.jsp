@@ -98,7 +98,7 @@
 	<script>
 		<script>
 		document.getElementById("listBtn").onclick = function() {
-			location.href="viewList.bo";
+			location.href="boardlist.jsp";
 		}
 		document.getElementById("updateBtn").onclick = function() {
 			location.href="modify.bo";
