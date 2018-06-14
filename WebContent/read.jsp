@@ -28,7 +28,7 @@
 							<td align="center" width="76">글번호</td>
 							<td width="319"><input type="text" style="display: none"
 								name="article_no" value="${article.seq }" readonly>
-								${member.seq}</td>
+								${article.seq}</td>
 							<td width="0">&nbsp;</td>
 						</tr>
 						<tr height="1" bgcolor="#dddddd">
