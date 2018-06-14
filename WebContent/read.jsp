@@ -106,7 +106,5 @@
 			open("pwcheck.jsp?proc=remo", "_blank", "width=400, height=400, top=200, left=200");
 		}
 	</script>
-
-	</script>
 </body>
 </html>
