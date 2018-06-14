@@ -65,9 +65,9 @@ public class FrontController extends HttpServlet {
 				dto.setContents(request.getParameter("contents"));
 				dto.setIp(request.getRemoteAddr());
 
-				int result = dao.modifyArticle(dto);
+//				int result = dao.modifyArticle(dto);
 
-				request.setAttribute("result", result);
+//				request.setAttribute("result", result);
 				request.setAttribute("seq", seq);
 				isForward = true;
 				dst = "result.jsp";
