@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoardDAO {
+	// 한 화면에 출력될 게시물 수
+	private int countList = 10;
+	// 한  화면에 출력할 페이지 수
+	private int coutPage = 10;
+	
 	private Connection getConnection() throws Exception {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		String dbURL = "jdbc:oracle:thin:@localhost:1521:XE";
