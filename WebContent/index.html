@@ -3,8 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+#wrap {
+	width: 700px;
+	height: 700px;
+	margin: 100px auto;
+}
+
+#boardBtn {
+	
+}
+</style>
 </head>
 <body>
+	<div id="wrap">
+		<table>
+			<tr>
+				<td><h1>^^ 방문을 환영합니다!!</h1></td>
+			</tr>
+			<tr>
+				<td>
+					<button id="boardBtn" type="button">게시판</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script>
+		document.getElementById("boardBtn").onclick = function() {
+			location.href = "viewList.bo";
+		}
+	</script>
 
 </body>
 </html>
