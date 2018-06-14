@@ -59,50 +59,57 @@ public class FrontController extends HttpServlet {
 			} 	else if(command.equals("/pwcheck.bo")) {
 				System.out.println("여기");
 				String password = request.getParameter("password");
+				String proc = request.getParameter("proc");
 				int seq = Integer.parseInt((String)request.getParameter("seq"));
-				
+
+
 				if(dao.passwordCheck(seq, password)) {
-				
-				isForward = false;
-				dst = "modify.jsp?seq=" + seq;
+
+					isForward = false;
+					if(proc.equals("modi")) {
+						dst = "modify.jsp?seq=" + seq;
+					} else if(proc.equals("remo")){
+						dst = "remove.jsp?seq=" + seq;
+					}
 				} else {
-					
+					isForward = false;
+					dst = "pwcheck.jsp?proc=" + proc + "&seq=" + seq;
 				}
-				
-			}	else if(command.equals("/modify.bo")) {
-				int seq = Integer.parseInt((String)request.getParameter("seq"));
-				
-				BoardDTO dto = new BoardDTO();
-				dto.setSeq(seq);
-				dto.setTitle(request.getParameter("title"));
-				dto.setPassword(request.getParameter("password"));
-				dto.setContents(request.getParameter("contents"));
 
-//				int result = dao.modifyArticle(dto);
+				}	else if(command.equals("/modify.bo")) {
+					int seq = Integer.parseInt((String)request.getParameter("seq"));
 
-//				request.setAttribute("result", result);
-				request.setAttribute("seq", seq);
-				isForward = true;
-				dst = "result.jsp";
+					BoardDTO dto = new BoardDTO();
+					dto.setSeq(seq);
+					dto.setTitle(request.getParameter("title"));
+					dto.setPassword(request.getParameter("password"));
+					dto.setContents(request.getParameter("contents"));
+
+					//				int result = dao.modifyArticle(dto);
+
+					//				request.setAttribute("result", result);
+					request.setAttribute("seq", seq);
+					isForward = true;
+					dst = "result.jsp";
+				}
+
+				if(isForward) {
+					RequestDispatcher rd = request.getRequestDispatcher(dst);
+					rd.forward(request, response);
+				} else {
+					response.sendRedirect(dst);
+				}
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
 			}
-
-			if(isForward) {
-				RequestDispatcher rd = request.getRequestDispatcher(dst);
-				rd.forward(request, response);
-			} else {
-				response.sendRedirect(dst);
-			}
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
 		}
+
+
+		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+			doGet(request, response);
+		}
+
 	}
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		doGet(request, response);
-	}
-
-}
