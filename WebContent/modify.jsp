@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="boardUpdateProc.jsp" method="post">
+	<form action="modify.bo" method="post">
 	<input type="hidden" name="seq" value="${seq.seq }">
 
 	<table border=1>
@@ -18,7 +18,7 @@
 		<tr>
 			<td><input type="text" size="100" name="title"
 				value=""></td>
-			<td style="display:none;"><input type="text" value="${result.seq }" name="seq" readonly></td>
+			<td style="display:none;"><input type="text" value="${seq.seq }" name="seq" readonly></td>
 		</tr>
 		<tr>
 			<td colspan="2" height=200><textarea rows="40" name="contents"
