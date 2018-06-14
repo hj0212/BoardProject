@@ -101,10 +101,10 @@
 			location.href="viewList.bo";
 		}
 		document.getElementById("updateBtn").onclick = function() {
-			location.href="modify.bo";
+			open("pwcheck.jsp?proc=modi", "_blank", "width=400, height=400, top=200, left=200");
 		}
 		document.getElementById("deleteBtn").onclick = function() {
-			location.href="removeArticle.do";
+			open("pwcheck.jsp?proc=remo", "_blank", "width=400, height=400, top=200, left=200");
 		}
 	</script>
 
