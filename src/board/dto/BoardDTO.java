@@ -11,6 +11,7 @@ public class BoardDTO {
 	private String ip;
 
 	public BoardDTO() {}
+	
 	public BoardDTO(int seq, String title, String password, String contents, String writedate, int viewcount,
 			String ip) {
 		super();
