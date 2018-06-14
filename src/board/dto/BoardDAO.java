@@ -91,4 +91,57 @@ public class BoardDAO {
 		conn.close();
 		return tmpList;
 	}
+	
+	public int modifyArticle(BoardDTO dto) throws Exception{
+		Connection conn = this.getConnection();
+		String sql = "UPDATE BOARDDB SET TITLE = ?, CONTENTS = ?, PASSWORD = ?, IP = ? WHERE SEQ = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, dto.getTitle());
+		pstmt.setString(2, dto.getContents());
+		pstmt.setString(3, dto.getPassword());
+		pstmt.setString(4, dto.getIp());
+		pstmt.setInt(5, dto.getSeq());
+		
+		int result = pstmt.executeUpdate();
+		
+		conn.commit();
+		pstmt.close();
+		conn.close();
+		return result;
+	}
+	
+	public int removeArticle(int seq, String password) throws Exception{
+		Connection conn = this.getConnection();
+		String sql = "DELETE FROM BOARDDB WHERE SEQ = ? AND PASSWORD = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, seq);
+		pstmt.setString(2, password);
+		
+		int result = pstmt.executeUpdate();
+		
+		conn.commit();
+		pstmt.close();
+		conn.close();
+		return result;
+	}
+	
+	public boolean passwordCheck(int seq, String password) throws Exception{
+		boolean result = false;
+		Connection conn = this.getConnection();
+		String sql = "SELECT * FROM BOARDDB WHERE SEQ = ? AND PASSWORD = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, seq);
+		pstmt.setString(2, password);
+		ResultSet rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			result = true;
+		}
+		
+		pstmt.close();
+		conn.close();
+		return result;
+	}
+	
+	
 }
