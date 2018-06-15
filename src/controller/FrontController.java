@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import article.boardList.ArticlePage;
+import article.boardList.ListArticleService;
 import board.dto.BoardDAO;
 import board.dto.BoardDTO;
 
@@ -25,13 +27,26 @@ public class FrontController extends HttpServlet {
 			String command = requestURI.substring(contextPath.length());
 
 			BoardDAO dao = new BoardDAO();
+			ListArticleService las = new ListArticleService();
 
 			boolean isForward = true;
 			String dst = null;
 
 			if(command.equals("/viewList.bo")) {
+				int pageNum = 0;
+				String pageNumString = request.getParameter("pageNum");
+				
+				if(pageNumString == null) {
+					pageNum = 1;
+				} else {
+					pageNum = Integer.parseInt(pageNumString);
+				}
+				ArticlePage ArticlePage = las.getArticlePage(pageNum);
+				request.setAttribute("articlepage", ArticlePage);
+				
 				List<BoardDTO> list = dao.viewList();
 				request.setAttribute("boardlist", list);
+				
 				isForward = true;
 				dst = "boardlist.jsp";
 
@@ -57,10 +72,7 @@ public class FrontController extends HttpServlet {
 				dst = "result.jsp";
 
 			} 	else if(command.equals("/pwcheck.bo")) {
-<<<<<<< HEAD
-			
-=======
->>>>>>> 창영
+
 				String password = request.getParameter("password");
 				String proc = request.getParameter("proc");
 				int seq = Integer.parseInt((String)request.getParameter("seq"));
