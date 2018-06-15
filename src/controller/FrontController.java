@@ -57,6 +57,7 @@ public class FrontController extends HttpServlet {
 				dst = "result.jsp";
 
 			} 	else if(command.equals("/pwcheck.bo")) {
+			
 				String password = request.getParameter("password");
 				String proc = request.getParameter("proc");
 				int seq = Integer.parseInt((String)request.getParameter("seq"));
