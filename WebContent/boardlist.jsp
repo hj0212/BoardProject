@@ -61,7 +61,7 @@ color:purple;
 			<c:forEach var="dto" items="${articlepage.getContent()}">
 				<tr>
 					<td>${dto.seq}</td>
-					<td class="title"><a href="read.bo?seq=${dto.seq}&pageNo=${articlepage.currentPage}">${dto.title}</a></td>
+					<td class="title"><a href="read.bo?seq=${dto.seq}&pageNum=${articlepage.currentPage}">${dto.title}</a></td>
 					<td>${dto.writedate}</td>
 					<td>${dto.viewcount}</td>
 				</tr>
@@ -76,13 +76,13 @@ color:purple;
 			<tr>
 			<td colspan=4>
 			<c:if test="${articlepage.startPage > 5}">
-			<a href="viewList.bo?pageNo=${articlepage.startPage - 5}">[이전]</a>
+			<a href="viewList.bo?pageNum=${articlepage.startPage - 5}">[이전]</a>
 			</c:if>
 			<c:forEach var="pNo" begin="${articlepage.startPage}" end="${articlepage.endPage}">
-			<a href="viewList.bo?pageNo=${pNo}">[${pNo}]</a>
+			<a href="viewList.bo?pageNum=${pNo}">[${pNo}]</a>
 			</c:forEach>
 			<c:if test="${articlepage.endPage < articlepage.totalPages}">
-			<a href="viewList.bo?pageNo=${articlepage.startPage + 5}">[다음]</a>
+			<a href="viewList.bo?pageNum=${articlepage.startPage + 5}">[다음]</a>
 			</c:if>
 			</td>
 			</tr>
