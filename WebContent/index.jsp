@@ -1,5 +1,7 @@
-
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="UTF-8">
@@ -27,11 +29,11 @@ left:20%;
 	<div id="wrap">
 		<table>
 			<tr>
-				<td><h1>^^ 방문을 환영합니다!!</h1></td>
+				<td><h1>${sessionScope.loginId} ��^^ �湮�� ȯ���մϴ�!!</h1></td>
 			</tr>
 			<tr>
 				<td>
-					<button id="boardBtn" type="button">게시판</button>
+					<button id="boardBtn" type="button">�Խ���</button>
 				</td>
 			</tr>
 		</table>

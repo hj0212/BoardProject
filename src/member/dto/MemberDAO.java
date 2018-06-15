@@ -17,8 +17,7 @@ public class MemberDAO {
 	public int addMember(MemberDTO dto) throws Exception{
 		Connection conn = this.getConnection();
 		String sql = "INSERT INTO memberdb VALUES(?,?,?,?)";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		ResultSet rs = null;
+		PreparedStatement pstmt = conn.prepareStatement(sql);		
 		pstmt.setString(1, dto.getId());
 		pstmt.setString(2, dto.getPw());
 		pstmt.setString(3, dto.getName());
@@ -29,6 +28,21 @@ public class MemberDAO {
 		pstmt.close();
 		conn.close();
 		return result;		
+	}
+	
+	public MemberDTO findMember (String id) throws Exception{
+		Connection conn = this.getConnection();
+		String sql = "select * from memberdb where id = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1,id);	
+		ResultSet rs =pstmt.executeQuery();
+		MemberDTO dto = new MemberDTO();
+		if(rs.next()) {}else {return dto;}
+			dto = new MemberDTO(rs.getString("id"),rs.getString("pw"),rs.getString("name"),rs.getString("email"));
+			conn.close();
+			pstmt.close();
+			rs.close();
+		return dto;
 	}
 	
 }
