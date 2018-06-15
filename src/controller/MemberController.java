@@ -61,8 +61,8 @@ public class MemberController extends HttpServlet {
 			
 			request.getSession().setAttribute("loginId", id);
 			int result=mdao.addNaverMember(new MemberDTO(id,name,email));
-			isForward = true;
-			dst="index.html";		
+			isForward = false;
+			dst="index.jsp";		
 		}else if(command.equals("/logout.do")) {
 			request.getSession().invalidate();
 		
