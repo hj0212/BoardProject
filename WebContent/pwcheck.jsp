@@ -24,8 +24,7 @@
 <script>
 document.getElementById("okbtn").onclick = function() {
 	pw = document.getElementById("pw").value;
-	opener.location.href = "pwcheck.bo?proc=${param.proc}&seq=${param.seq}&password="+pw;
-    window.close();
+	location.href = "pwcheck.bo?proc=${param.proc}&seq=${param.seq}&password="+pw;
 }
 </script>
 

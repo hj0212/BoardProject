@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+#wrap {
+	margin: 100px auto;
+	text-align: center;
+}
+
+.btns {
+	width: 80px;
+	border-radius: 3px;
+	background-color: white;
+}
+
+.btns:hover {
+	background-color: black;
+	color: white;
+}
+</style>
+</head>
+
+<body>
+	<div id="wrap">
+		<p>
+		<h1>L O G I N</h1>
+		</p>
+		<form id="formlogin" action="login.do" method="post">
+			<p>
+				<input type="text" name="id" placeholder="아이디">
+			</p>
+			<p>
+				<input type="text" name="pw" placeholder="비밀번호">
+			</p>
+			<p>
+				<button id="loginBtn" class="btns">로그인</button>
+				<button id="joinBtn" type="button" class="btns">회원가입</button>
+			</p>
+		</form>
+	</div>
+<!-- -------------스크립트 시작--------------- -->
+	<script>
+		document.getElementById("joinBtn").onclick = function() {
+			location.href="joinForm.jsp";
+		}
+	</script>
+</body>
+</html>

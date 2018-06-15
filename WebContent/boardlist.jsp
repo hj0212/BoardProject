@@ -53,6 +53,7 @@ color:purple;
 				<th class="top" width=200>날짜</th>
 				<th class="top" width=100>조회수</th>
 			</tr>
+			<c:if test ="${articlepage.hasNoArticles()}">
 			<c:forEach var="dto" items="${boardlist}">
 				<tr>
 					<td>${dto.seq}</td>

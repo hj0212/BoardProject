@@ -113,7 +113,7 @@ public class BoardDAO {
 		conn.commit();
 		pstmt.close();
 		conn.close();
-		return result;
+		return dto.getSeq();
 	}
 	
 	public int removeArticle(int seq, String password) throws Exception{
