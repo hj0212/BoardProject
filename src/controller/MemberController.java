@@ -38,6 +38,12 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("addResult", result);	
 			isForward = true;
 			dst="joinFormResult.jsp";
+		}else if(command.equals("/navlogin.do")) {
+			String id = request.getParameter("id");
+			String name = request.getParameter("name");
+			String email = request.getParameter("email");
+			
+			
 		}
 		
 		if(isForward) {
