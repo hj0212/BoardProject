@@ -31,6 +31,21 @@ public class MemberController extends HttpServlet {
 		String dst = null;
 		
 		if(command.equals("/login.do")) {
+			String loginId=request.getParameter("id");
+			String loginPw=request.getParameter("pw");
+			MemberDTO dto = mdao.findMember(loginId);
+			
+			if(dto.getId()!=null) {
+				if(loginPw.equals(dto.getPw())) {
+					request.setAttribute("loginResult", 11);
+					request.getSession().setAttribute("loginId", loginId);
+				}else {request.setAttribute("loginResult", 10);}
+			}else {
+				request.setAttribute("loginResult", 00);
+			}	
+			
+			isForward = true;
+			dst="loginResult.jsp";
 			
 		}else if(command.equals("/join.do")) {
 			MemberDTO dto = new MemberDTO(request.getParameter("id"),request.getParameter("pw"),request.getParameter("name"),request.getParameter("email"));			
@@ -42,8 +57,13 @@ public class MemberController extends HttpServlet {
 			String id = request.getParameter("id");
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
+			System.out.println("id:" + id + ", name:" + name + ", email:" + email);
 			
-			
+			request.getSession().setAttribute("loginId", id);
+			int result=mdao.addNaverMember(new MemberDTO(id,name,email));
+			isForward = true;
+			dst="index.html";
+		
 		}
 		
 		if(isForward) {

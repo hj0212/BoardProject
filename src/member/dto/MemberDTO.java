@@ -7,6 +7,12 @@ public class MemberDTO {
 	private String email;
 	
 	public MemberDTO() {}
+	public MemberDTO(String id, String name, String email) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+	}
 	public MemberDTO(String id, String pw, String name, String email) {
 		super();
 		this.id = id;
