@@ -41,7 +41,7 @@ public class FrontController extends HttpServlet {
 				BoardDTO dto = dao.readArticle(seq);
 				request.setAttribute("article", dto);
 				isForward = true;
-				dst = "read.jsp";
+				dst = "read.jsp?seq=" + seq;
 
 			} else if(command.equals("/write.bo")) {
 				BoardDTO dto = new BoardDTO();
@@ -52,44 +52,63 @@ public class FrontController extends HttpServlet {
 
 				int result = dao.writeArticle(dto);
 
-				request.setAttribute("result", result);
+				request.setAttribute("result", result); 
 				isForward = true;
 				dst = "result.jsp";
 
-			} else if(command.equals("/modify.bo")) {
+			} 	else if(command.equals("/pwcheck.bo")) {
+				String password = request.getParameter("password");
+				String proc = request.getParameter("proc");
 				int seq = Integer.parseInt((String)request.getParameter("seq"));
-				
-				BoardDTO dto = new BoardDTO();
-				dto.setTitle(request.getParameter("title"));
-				dto.setPassword(request.getParameter("password"));
-				dto.setContents(request.getParameter("contents"));
-				dto.setIp(request.getRemoteAddr());
 
-				int result = dao.modifyArticle(dto);
 
-				request.setAttribute("result", result);
-				request.setAttribute("seq", seq);
-				isForward = true;
-				dst = "result.jsp";
+				if(dao.passwordCheck(seq, password)) {
+
+					isForward = false;
+					if(proc.equals("modi")) {
+						dst = "modify.jsp?seq=" + seq;
+					} else if(proc.equals("remo")){
+						dst = "remove.jsp?seq=" + seq;
+					}
+				} else {
+					isForward = false;
+					dst = "pwcheck.jsp?proc=" + proc + "&seq=" + seq;
+				}
+
+				}	else if(command.equals("/modify.bo")) {
+					int seq = Integer.parseInt((String)request.getParameter("seq"));
+
+					BoardDTO dto = new BoardDTO();
+					dto.setSeq(seq);
+					dto.setTitle(request.getParameter("title"));
+					dto.setPassword(request.getParameter("password"));
+					dto.setContents(request.getParameter("contents"));
+
+					//				int result = dao.modifyArticle(dto);
+
+					//				request.setAttribute("result", result);
+					request.setAttribute("seq", seq);
+					isForward = true;
+					dst = "result.jsp";
+				}
+
+				if(isForward) {
+					RequestDispatcher rd = request.getRequestDispatcher(dst);
+					rd.forward(request, response);
+				} else {
+					response.sendRedirect(dst);
+				}
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
 			}
-
-			if(isForward) {
-				RequestDispatcher rd = request.getRequestDispatcher(dst);
-				rd.forward(request, response);
-			} else {
-				response.sendRedirect(dst);
-			}
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
 		}
+
+
+		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+			doGet(request, response);
+		}
+
 	}
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		doGet(request, response);
-	}
-
-}

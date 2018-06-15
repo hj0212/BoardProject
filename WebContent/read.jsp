@@ -46,7 +46,7 @@
 						<tr>
 							<td width="0">&nbsp;</td>
 							<td align="center" width="76">작성일</td>
-							<td width="319">${article.writedate; }</td>
+							<td width="319">${article.writedate}</td>
 							<td width="0">&nbsp;</td>
 						</tr>
 						<tr height="1" bgcolor="#dddddd">
@@ -96,18 +96,16 @@
 		</tr>
 	</table>
 	<script>
-		<script>
 		document.getElementById("listBtn").onclick = function() {
 			location.href="viewList.bo";
 		}
+		
 		document.getElementById("updateBtn").onclick = function() {
-			location.href="modify.bo";
+			open("pwcheck.jsp?proc=modi&seq=" + ${article.seq}, "_blank", "width=400, height=400, top=200, left=200");
 		}
 		document.getElementById("deleteBtn").onclick = function() {
-			location.href="removeArticle.do";
+			open("pwcheck.jsp?proc=remo&seq=" + ${article.seq}, "_blank", "width=400, height=400, top=200, left=200");
 		}
-	</script>
-
 	</script>
 </body>
 </html>
