@@ -63,7 +63,6 @@ public class FrontController extends HttpServlet {
 
 
 				if(dao.passwordCheck(seq, password)) {
-
 					if(proc.equals("modi")) {
 						isForward = false;
 						dst = "modify.jsp?seq=" + seq;
@@ -78,40 +77,40 @@ public class FrontController extends HttpServlet {
 					dst = "pwcheck.jsp?proc=" + proc + "&seq=" + seq;
 				}
 
-				}	else if(command.equals("/modify.bo")) {
-					int seq = Integer.parseInt((String)request.getParameter("seq"));
+			}	else if(command.equals("/modify.bo")) {
+				System.out.println("여기");
+				int seq = Integer.parseInt((String)request.getParameter("seq"));
+				BoardDTO dto = new BoardDTO();
+				dto.setSeq(seq);
+				dto.setTitle(request.getParameter("title"));
+				dto.setPassword(request.getParameter("password"));
+				dto.setContents(request.getParameter("contents"));
 
-					BoardDTO dto = new BoardDTO();
-					dto.setSeq(seq);
-					dto.setTitle(request.getParameter("title"));
-					dto.setPassword(request.getParameter("password"));
-					dto.setContents(request.getParameter("contents"));
+				int result = dao.modifyArticle(dto);
 
-					//				int result = dao.modifyArticle(dto);
-
-					//				request.setAttribute("result", result);
-					request.setAttribute("seq", seq);
-					isForward = true;
-					dst = "result.jsp";
-				}
-
-				if(isForward) {
-					RequestDispatcher rd = request.getRequestDispatcher(dst);
-					rd.forward(request, response);
-				} else {
-					response.sendRedirect(dst);
-				}
-
-			} catch (Exception e) {
-
-				e.printStackTrace();
+				request.setAttribute("result", result);
+				request.setAttribute("seq", seq);
+				isForward = true;
+				dst = "result.jsp";
 			}
+
+			if(isForward) {
+				RequestDispatcher rd = request.getRequestDispatcher(dst);
+				rd.forward(request, response);
+			} else {
+				response.sendRedirect(dst);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
 		}
-
-
-		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-			doGet(request, response);
-		}
-
 	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		doGet(request, response);
+	}
+
+}

@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+저기
 	<script>
 	if(${result > 0}) {
 		alert("성공");

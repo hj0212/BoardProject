@@ -9,7 +9,7 @@
 </head>
 <body>
 	<form action="modify.bo" method="post">
-	<input type="hidden" name="seq" value="${seq.seq }">
+	<input type="hidden" name="seq" value="${param.seq }">
 
 	<table border=1>
 		<tr>
@@ -18,7 +18,7 @@
 		<tr>
 			<td><input type="text" size="100" name="title"
 				value=""></td>
-			<td style="display:none;"><input type="text" value="${seq.seq }" name="seq" readonly></td>
+			<td style="display:none;"><input type="text" value="${param.seq }" name="seq" readonly></td>
 		</tr>
 		<tr>
 			<td colspan="2" height=200><textarea rows="40" name="contents"
@@ -35,7 +35,6 @@
 	
 </form>
 	<script>
-	
 	document.getElementById("backBtn").onclick = function() {
 		location.href = "viewList.bo"
 	}
