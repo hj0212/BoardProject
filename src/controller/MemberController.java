@@ -31,7 +31,10 @@ public class MemberController extends HttpServlet {
 		if(command.equals("/login.do")) {
 			
 		}else if(command.equals("/join.do")) {
-			
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			String name = request.getParameter("name");
+			String email = request.getParameter("email");
 		}
 		
 		if(isForward) {
