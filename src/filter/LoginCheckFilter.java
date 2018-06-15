@@ -29,7 +29,7 @@ public class LoginCheckFilter implements Filter {
 		
 		boolean pass = false;
 		
-		if(addr.startsWith("/loginProc.html") || addr.equals("/navlogin.do") || addr.equals("/joinForm.jsp") || addr.equals("/join.do")) {
+		if(addr.startsWith("/loginProc.html") || addr.equals("/navlogin.do") || addr.equals("/joinForm.jsp") || addr.equals("/join.do") || addr.equals("/login.do")) {
 			pass = true;
 		}
 		
