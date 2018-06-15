@@ -37,7 +37,7 @@
 	<script>
 	
 	document.getElementById("backBtn").onclick = function() {
-		location.href = "boardlist.jsp"
+		location.href = "viewList.bo"
 	}
 	</script>
 </body>
