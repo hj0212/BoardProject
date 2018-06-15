@@ -30,6 +30,8 @@ public class MemberController extends HttpServlet {
 		
 		if(command.equals("/login.do")) {
 			
+		}else if(command.equals("/join.do")) {
+			
 		}
 		
 		if(isForward) {
