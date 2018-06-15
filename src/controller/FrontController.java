@@ -57,6 +57,7 @@ public class FrontController extends HttpServlet {
 				dst = "result.jsp";
 
 			} 	else if(command.equals("/pwcheck.bo")) {
+			
 				String password = request.getParameter("password");
 				String proc = request.getParameter("proc");
 				int seq = Integer.parseInt((String)request.getParameter("seq"));
@@ -79,13 +80,14 @@ public class FrontController extends HttpServlet {
 				}
 
 				}	else if(command.equals("/modify.bo")) {
-					int seq = Integer.parseInt((String)request.getParameter("seq"));
+					System.out.println((String)request.getParameter("seq"));
+					int seq = Integer.parseInt(request.getParameter("seq").toString());
 
 					BoardDTO dto = new BoardDTO();
 					dto.setSeq(seq);
-					dto.setTitle(request.getParameter("title"));
-					dto.setPassword(request.getParameter("password"));
-					dto.setContents(request.getParameter("contents"));
+					dto.setTitle(request.getParameter("title").toString());
+					dto.setPassword(request.getParameter("password").toString());
+					dto.setContents(request.getParameter("contents").toString());
 
 					//				int result = dao.modifyArticle(dto);
 
