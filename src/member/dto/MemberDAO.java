@@ -45,4 +45,45 @@ public class MemberDAO {
 		return dto;
 	}
 	
+	public int addNaverMember(MemberDTO dto) throws Exception{
+		if(!check(dto.getId())) {
+			Connection conn = this.getConnection();
+			String sql = "INSERT INTO navermemberdb VALUES(?,?,?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+	
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getName());
+			pstmt.setString(3, dto.getEmail());
+			
+			int result = pstmt.executeUpdate();		
+			conn.commit();
+			pstmt.close();
+			conn.close();
+			return result;	
+		}
+		
+		return 0;
+	}
+	
+	private boolean check(String id) throws Exception {
+		Connection conn = this.getConnection();
+		String sql = "select * from navermemberdb where id=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, id);
+		ResultSet rs = pstmt.executeQuery();
+		boolean result;
+		if(rs.next()) {
+			result = true;
+		} else {
+			result = false;
+		}
+		
+		rs.close();
+		conn.close();
+		pstmt.close();
+		
+		return result;
+	}
+	
 }
