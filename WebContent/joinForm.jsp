@@ -78,7 +78,7 @@ margin-top:100px;
 		
 		<p>
 			<button id="send" class="btns" type="submit">가입</button>
-			<button id="back" class="btns">돌아 가기</button>
+			<button id="back" class="btns" type="button">돌아 가기</button>
 		</p>
 		</form>
 	</div>

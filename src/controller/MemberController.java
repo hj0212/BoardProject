@@ -57,9 +57,8 @@ public class MemberController extends HttpServlet {
 			String id = request.getParameter("id");
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
-			System.out.println("id:" + id + ", name:" + name + ", email:" + email);
 			
-			request.getSession().setAttribute("loginId", id);
+			request.getSession().setAttribute("loginId", name);
 			int result=mdao.addNaverMember(new MemberDTO(id,name,email));
 			isForward = false;
 			dst="index.jsp";		
