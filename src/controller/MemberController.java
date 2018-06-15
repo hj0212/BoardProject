@@ -52,7 +52,6 @@ public class MemberController extends HttpServlet {
 		} else {
 			response.sendRedirect(dst);
 		}
-		
 	}catch(Exception e) {e.printStackTrace();}		
 	}
 
