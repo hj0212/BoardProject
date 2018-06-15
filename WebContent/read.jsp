@@ -96,18 +96,16 @@
 		</tr>
 	</table>
 	<script>
-		
 		document.getElementById("listBtn").onclick = function() {
 			location.href="viewList.bo";
 		}
+		
 		document.getElementById("updateBtn").onclick = function() {
 			location.href="pwcheck.jsp?proc=modi&seq=" + ${article.seq};
 		}
 		document.getElementById("deleteBtn").onclick = function() {
 			location.href="pwcheck.jsp?proc=remo&seq=" + ${article.seq};
 		}
-	
-
 	</script>
 </body>
 </html>

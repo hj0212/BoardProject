@@ -4,10 +4,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BoardDAO {
+	// 한 화면에 출력될 게시물 수
+	private int countList = 10;
+	// 한  화면에 출력할 페이지 수
+	private int coutPage = 10;
+	
 	private Connection getConnection() throws Exception {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		String dbURL = "jdbc:oracle:thin:@localhost:1521:XE";
@@ -143,5 +149,51 @@ public class BoardDAO {
 		return result;
 	}
 	
+	public int selectCount() throws Exception {
+		Connection conn = this.getConnection();
+		Statement stmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		
+		stmt = conn.createStatement();
+		rs = stmt.executeQuery("SELECT COUNT(*) FROM BOARDDB"); 
+		if(rs.next()) {
+			count = rs.getInt(1);
+		}
+		
+		rs.close();
+		stmt.close();
+		conn.close();
+		return count;
+	}
 	
+	public List<BoardDTO> select(int startRow, int size) throws Exception{
+		Connection conn = this.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		pstmt = conn.prepareStatement("SELECT * FROM (SELECT B.*, row_number() over (ORDER BY 1) as num FROM BOARDDB B) WHERE num between ? and ?");
+		pstmt.setInt(1, startRow);
+		pstmt.setInt(2, size);
+		rs = pstmt.executeQuery();
+		List<BoardDTO> result = new ArrayList<>();
+		
+		while(rs.next()) {
+			BoardDTO tmp = new BoardDTO();
+			tmp.setSeq(rs.getInt("SEQ"));
+			tmp.setTitle(rs.getString("TITLE"));
+			tmp.setPassword(rs.getString("PASSWORD"));
+			tmp.setContents(rs.getString("CONTENTS"));
+			tmp.setWritedate(rs.getDate("WRITEDATE").toString());
+			tmp.setViewcount(rs.getInt("VIEWCOUNT"));
+			tmp.setIp(rs.getString("IP"));
+			result.add(tmp);
+		}
+		
+		rs.close();
+		pstmt.close();
+		conn.close();
+		
+		return result;
+	}
 }
