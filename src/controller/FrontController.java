@@ -57,7 +57,6 @@ public class FrontController extends HttpServlet {
 				dst = "result.jsp";
 
 			} 	else if(command.equals("/pwcheck.bo")) {
-				System.out.println("여기");
 				String password = request.getParameter("password");
 				String proc = request.getParameter("proc");
 				int seq = Integer.parseInt((String)request.getParameter("seq"));
@@ -65,11 +64,14 @@ public class FrontController extends HttpServlet {
 
 				if(dao.passwordCheck(seq, password)) {
 
-					isForward = false;
 					if(proc.equals("modi")) {
+						isForward = false;
 						dst = "modify.jsp?seq=" + seq;
 					} else if(proc.equals("remo")){
-						dst = "remove.jsp?seq=" + seq;
+						int result = dao.removeArticle(seq, password);
+						request.setAttribute("result", result);
+						isForward = true;
+						dst = "removeresult.jsp";
 					}
 				} else {
 					isForward = false;
