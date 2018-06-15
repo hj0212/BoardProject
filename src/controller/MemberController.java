@@ -53,6 +53,7 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("addResult", result);	
 			isForward = true;
 			dst="joinFormResult.jsp";
+			
 		}else if(command.equals("/navlogin.do")) {
 			String id = request.getParameter("id");
 			String name = request.getParameter("name");
@@ -60,8 +61,14 @@ public class MemberController extends HttpServlet {
 			
 			request.getSession().setAttribute("loginId", name);
 			int result=mdao.addNaverMember(new MemberDTO(id,name,email));
+<<<<<<< Updated upstream
 			isForward = false;
 			dst="index.jsp";		
+=======
+			isForward = true;
+			dst="index.html";		
+			
+>>>>>>> Stashed changes
 		}else if(command.equals("/logout.do")) {
 			request.getSession().invalidate();
 		
