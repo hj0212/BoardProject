@@ -58,7 +58,7 @@ color:purple;
 			<td colspan=4>게시글이 없습니다.</td>
 			</tr>
 			</c:if>
-			<c:forEach var="dto" items="${boardlist}">
+			<c:forEach var="dto" items="${articlepage.getContent()}">
 				<tr>
 					<td>${dto.seq}</td>
 					<td class="title"><a href="read.bo?seq=${dto.seq}&pageNo=${articlepage.currentPage}">${dto.title}</a></td>
@@ -79,7 +79,7 @@ color:purple;
 			<a href="viewList.bo?pageNo=${articlepage.startPage - 5}">[이전]</a>
 			</c:if>
 			<c:forEach var="pNo" begin="${articlepage.startPage}" end="${articlepage.endPage}">
-			<a href="viewList.bo.?pageNo=${pNo}">[${pNo}]</a>
+			<a href="viewList.bo?pageNo=${pNo}">[${pNo}]</a>
 			</c:forEach>
 			<c:if test="${articlepage.endPage < articlepage.totalPages}">
 			<a href="viewList.bo?pageNo=${articlepage.startPage + 5}">[다음]</a>
