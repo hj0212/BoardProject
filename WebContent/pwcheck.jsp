@@ -8,22 +8,23 @@
 
 </head>
 <body>
-<form action="pwcheck.bo?seq=${param.seq}" method="post">
+
 <table>
 	<tr> 
 		<td>패스워드를 입력하세요</td>
 	</tr>
 	<tr>
-		<td><input type="password" name="password"/></td>
+		<td><input id="pw" type="password" name="password"/></td>
 	</tr>
 	<tr>
 		<td><button id="okbtn">확인</button></td>
 	</tr>
 </table>
-</form>
+
 <script>
 document.getElementById("okbtn").onclick = function() {
-    window.close();
+	pw = document.getElementById("pw").value;
+	location.href = "pwcheck.bo?proc=${param.proc}&seq=${param.seq}&password="+pw;
 }
 </script>
 
