@@ -148,5 +148,4 @@ public class BoardDAO {
 		return result;
 	}
 	
-	
 }
