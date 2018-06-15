@@ -53,10 +53,15 @@ color:purple;
 				<th class="top" width=200>날짜</th>
 				<th class="top" width=100>조회수</th>
 			</tr>
-			<c:forEach var="dto" items="${boardlist}">
+			<c:if test ="${articlepage.hasNoArticles()}">
+			<tr>
+			<td colspan=4>게시글이 없습니다.</td>
+			</tr>
+			</c:if>
+			<c:forEach var="dto" items="${articlepage.getContent()}">
 				<tr>
 					<td>${dto.seq}</td>
-					<td class="title"><a href="read.bo?seq=${dto.seq}">${dto.title}</a></td>
+					<td class="title"><a href="read.bo?seq=${dto.seq}&pageNum=${articlepage.currentPage}">${dto.title}</a></td>
 					<td>${dto.writedate}</td>
 					<td>${dto.viewcount}</td>
 				</tr>
@@ -67,6 +72,21 @@ color:purple;
 					<button id="backBtn">홈으로</button>
 				</td>
 			</tr>
+			<c:if test="${articlepage.hasArticles()}">
+			<tr>
+			<td colspan=4>
+			<c:if test="${articlepage.startPage > 5}">
+			<a href="viewList.bo?pageNum=${articlepage.startPage - 5}">[이전]</a>
+			</c:if>
+			<c:forEach var="pNo" begin="${articlepage.startPage}" end="${articlepage.endPage}">
+			<a href="viewList.bo?pageNum=${pNo}">[${pNo}]</a>
+			</c:forEach>
+			<c:if test="${articlepage.endPage < articlepage.totalPages}">
+			<a href="viewList.bo?pageNum=${articlepage.startPage + 5}">[다음]</a>
+			</c:if>
+			</td>
+			</tr>
+			</c:if>
 		</table>
 	</div>
 	<script>

@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-저기
 	<script>
 	if(${result > 0}) {
 		alert("성공");
@@ -16,7 +15,7 @@
 		alert("실패");
 	}
 	
-	location.href = "read.bo?seq=" + ${result};
+	location.href = "viewList.bo";
 	</script>
 </body>
 </html>
