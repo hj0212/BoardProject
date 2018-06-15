@@ -5,6 +5,7 @@ import java.util.List;
 import board.dto.BoardDTO;
 
 public class ArticlePage {
+	
 	private int total;
 	private int currentPage;
 	private List<BoardDTO> content;
