@@ -172,7 +172,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		pstmt = conn.prepareStatement("SELECT * FROM (SELECT B.*, row_number() over (ORDER BY seq desc) as num FROM BOARD B) WHERE num between ? and ? ORDER BY NUM DESC");
+		pstmt = conn.prepareStatement("SELECT * FROM (SELECT B.*, row_number() over (ORDER BY seq desc) as num FROM BOARDDB B) WHERE num between ? and ? ORDER BY NUM");
 		pstmt.setInt(1, startRow);
 		pstmt.setInt(2, size);
 		rs = pstmt.executeQuery();
