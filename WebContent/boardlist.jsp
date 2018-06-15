@@ -76,13 +76,13 @@ color:purple;
 			<tr>
 			<td colspan=4>
 			<c:if test="${articlepage.startPage > 5}">
-			<a href="list.do?pageNo=${articlepage.startPage - 5}">[이전]</a>
+			<a href="viewList.bo?pageNo=${articlepage.startPage - 5}">[이전]</a>
 			</c:if>
 			<c:forEach var="pNo" begin="${articlepage.startPage}" end="${articlepage.endPage}">
-			<a href="list.do?pageNo=${pNo}">[${pNo}]</a>
+			<a href="viewList.bo.?pageNo=${pNo}">[${pNo}]</a>
 			</c:forEach>
 			<c:if test="${articlepage.endPage < articlepage.totalPages}">
-			<a href="list.do?pageNo=${articlepage.startPage + 5}">[다음]</a>
+			<a href="viewList.bo?pageNo=${articlepage.startPage + 5}">[다음]</a>
 			</c:if>
 			</td>
 			</tr>
