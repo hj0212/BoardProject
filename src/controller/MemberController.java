@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.dto.BoardDAO;
 import member.dto.MemberDAO;
+import member.dto.MemberDTO;
 
 
 @WebServlet("*.do")
 public class MemberController extends HttpServlet { 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	try {
 		String requestURI= request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length());
@@ -31,10 +33,11 @@ public class MemberController extends HttpServlet {
 		if(command.equals("/login.do")) {
 			
 		}else if(command.equals("/join.do")) {
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			String name = request.getParameter("name");
-			String email = request.getParameter("email");
+			MemberDTO dto = new MemberDTO(request.getParameter("id"),request.getParameter("pw"),request.getParameter("name"),request.getParameter("email"));			
+			int result=mdao.addMember(dto);	
+			request.setAttribute("addResult", result);	
+			isForward = true;
+			dst="joinFormResult.jsp";
 		}
 		
 		if(isForward) {
@@ -43,6 +46,8 @@ public class MemberController extends HttpServlet {
 		} else {
 			response.sendRedirect(dst);
 		}
+		
+	}catch(Exception e) {e.printStackTrace();}		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

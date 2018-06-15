@@ -75,11 +75,12 @@ margin-top:100px;
 			<input type="text" id="emailtxt" name="email">
 			</td>
 		</table>
-		</form>
+		
 		<p>
-			<button id="send" class="btns">가입</button>
+			<button id="send" class="btns" type="submit">가입</button>
 			<button id="back" class="btns">돌아 가기</button>
 		</p>
+		</form>
 	</div>
 	<script>
 	document.getElementById("back").onclick=function(){
