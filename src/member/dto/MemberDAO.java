@@ -102,21 +102,28 @@ public class MemberDAO {
 		conn.close();
 		pstmt.close();
 		
-		return dateResult;
+		return dateResult;		
+	}
+	
+	public int modifyMember(MemberDTO dto) throws Exception{
+		Connection conn = this.getConnection();
+		String sql = "update memberdb set pw=? , email=? last_modified=sysdate where id=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
 		
+		pstmt.setString(1, dto.getPw());
+		pstmt.setString(2, dto.getEmail());
+		pstmt.setString(3, dto.getId());
+		int result = pstmt.executeUpdate();
+	
+		conn.close();
+		pstmt.close();
+		
+		return result;	
 	}
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

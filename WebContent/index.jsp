@@ -46,6 +46,7 @@ table {
 				<td>
 					<button id="boardBtn" type="button" class="btns">게시판</button>
 					<button id="logoutBtn" type="button" class="btns">로그아웃</button>
+					<button id="modifyBtn" type="button" class="btns">정보수정</button>
 				</td>
 			</tr>
 		</table>
@@ -57,6 +58,9 @@ table {
 		}
 		document.getElementById("logoutBtn").onclick=function(){
 			location.href="logout.do";
+		}
+		document.getElementById("modifyBtn").onclick=function(){
+			location.href="showInfo.do";
 		}
 	</script>
 

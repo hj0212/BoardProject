@@ -79,6 +79,21 @@ public class MemberController extends HttpServlet {
 				isForward = true;
 				dst="login.html";	
 			}
+			else if(command.equals("/showInfo.do")) {
+				MemberDTO dto =mdao.findMember(request.getParameter("loginId"));
+				request.setAttribute("memberInfo", dto);
+				isForward = true;
+				dst="memberModify.jsp";	
+			}
+			
+			else if(command.equals("/modify.do")) {
+				
+				MemberDTO newdto=new MemberDTO(request.getParameter("id"),request.getParameter("pw"),request.getParameter("name"),request.getParameter("email"));
+				int result = mdao.modifyMember(newdto);
+				request.setAttribute("modifyResult", result);
+				isForward = true;
+				dst="memberModify.jsp";	
+			}
 
 			if(isForward) {
 				RequestDispatcher rd = request.getRequestDispatcher(dst);

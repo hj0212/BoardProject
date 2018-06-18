@@ -10,8 +10,8 @@
 <h1>
 비밀번호를 변경하시겠습니까?
 </h1>
-<button id="yes">예</button>
-<button id="no">다음에</button>
+<button id="yes" class="btns">예</button>
+<button id="no" class="btns">다음에</button>
 
 <script>
 document.getElementById("no").onclick=function(){
