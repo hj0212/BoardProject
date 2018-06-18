@@ -7,6 +7,7 @@
 	src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"
 	charset="utf-8"></script>
 <style>
+
 #wrap {
 	margin: 100px auto;
 	text-align: center;
@@ -35,7 +36,7 @@
 				<input type="text" name="id" placeholder="아이디">
 			</p>
 			<p>
-				<input type="text" name="pw" placeholder="비밀번호">
+				<input type="password" name="pw" placeholder="비밀번호">
 			</p>
 			<p>
 				<button id="loginBtn" class="btns">로그인</button>
@@ -43,7 +44,6 @@
 			</p>
 		</form>
 		<p><div id="naverIdLogin"></div>
-
 
 	</div>
 <!-- -------------스크립트 시작--------------- -->
@@ -68,6 +68,17 @@
 		window.addEventListener('load', function () {
 			naverLogin.getLoginStatus(function (status) {
 				if (status) {
+					var uniqId = naverLogin.user.getId();
+					var email = naverLogin.user.getEmail();
+					var nickname = naverLogin.user.getNickName();
+					if( email == undefined || email == null) {
+						alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
+						/* (5-1) 사용자 정보 재동의를 위하여 다시 네아로 동의페이지로 이동함 */
+						naverLogin.reprompt();
+						return;
+					}
+
+					window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/BoardProject/navlogin.do?id="+uniqId+"&name="+nickname+"&email=" + email);
 					/* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
 					setLoginStatus();
 				}

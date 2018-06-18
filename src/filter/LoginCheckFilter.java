@@ -23,14 +23,23 @@ public class LoginCheckFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest)request;
 		HttpSession session = httpRequest.getSession(false);
 		
-		boolean login = false;
+		String requestURI = httpRequest.getRequestURI();
+		String requestPath = httpRequest.getContextPath();
+		String addr = requestURI.substring(requestPath.length());
+		
+		boolean pass = false;
+		
+		if(addr.startsWith("/loginProc.html") || addr.equals("/navlogin.do") || addr.equals("/joinForm.jsp") || addr.equals("/join.do") || addr.equals("/login.do")) {
+			pass = true;
+		}
+		
 		if(session != null) {
 			if(session.getAttribute("loginId") != null) {
-				login = true;
+				pass = true;
 			}
 		}
 		
-		if(login) {
+		if(pass) {
 			chain.doFilter(request, response);
 		}else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.html");

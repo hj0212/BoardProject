@@ -94,7 +94,7 @@ color:purple;
 			location.href = "write.jsp";
 		}
 		document.getElementById("backBtn").onclick = function() {
-			location.href = "index.html";
+			location.href = "index.jsp";
 		}
 	</script>
 </body>
