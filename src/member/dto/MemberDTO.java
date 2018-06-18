@@ -5,6 +5,7 @@ public class MemberDTO {
 	private String pw;
 	private String name;
 	private String email;
+	private String last_modified;
 	
 	public MemberDTO() {}
 	public MemberDTO(String id, String name, String email) {
@@ -20,7 +21,16 @@ public class MemberDTO {
 		this.name = name;
 		this.email = email;
 	}
-	
+
+
+	public MemberDTO(String id, String pw, String name, String email, String last_modified) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.email = email;
+		this.last_modified = last_modified;
+	}
 	public String getId() {
 		return id;
 	}
@@ -47,4 +57,10 @@ public class MemberDTO {
 	}
 	
 	
+	public String getLast_modified() {
+		return last_modified;
+	}
+	public void setLast_modified(String last_modified) {
+		this.last_modified = last_modified;
+	}
 }

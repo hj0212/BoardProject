@@ -16,7 +16,7 @@ public class MemberDAO {
 	
 	public int addMember(MemberDTO dto) throws Exception{
 		Connection conn = this.getConnection();
-		String sql = "INSERT INTO memberdb VALUES(?,?,?,?)";
+		String sql = "INSERT INTO memberdb VALUES(?,?,?,?,sysdate)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);		
 		pstmt.setString(1, dto.getId());
 		pstmt.setString(2, dto.getPw());
@@ -85,5 +85,39 @@ public class MemberDAO {
 		
 		return result;
 	}
+	
+	public int checkModified(String id) throws Exception{
+		Connection conn = this.getConnection();
+		String sql = "select sysdate-last_modified as modified from memberdb where id=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		int dateResult =0;
+		pstmt.setString(1, id);
+		ResultSet rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			dateResult =rs.getInt("modified");
+			
+		}else {}
+		rs.close();
+		conn.close();
+		pstmt.close();
+		
+		return dateResult;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
